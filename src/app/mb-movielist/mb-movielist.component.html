@@ -1,0 +1,41 @@
+<br>
+<br>
+<div class="ui page grid">
+
+    <div class="ui special cards">
+        <div class="card" *ngFor="let movieItem of movieList;let i = index">
+            <div class="ui basic modal {{i}}">
+                <!--<i class="close icon"></i>-->
+                <h1>{{movieItem.title}}</h1>
+                <h2>简介：</h2>
+                <h3>{{movieItem.summaryText}}</h3>
+            </div>
+            <div class="blurring dimmable image">
+                <div class="ui dimmer">
+                    <div class="content">
+                        <div class="center">
+                            <i></i>
+                            <a *ngFor="let playable of movieItem.playableFilePath" class="ui huge inverted basic button" [href]="sanitize(playable)">
+                                <!--<i class="play icon huge"></i>-->
+                                PLAY
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <img class="movieimg" [src]="'./assets/db/'+movieItem.imgFileName">
+            </div>
+            <div class="content">
+                <a class="header" [href]="movieItem.url" target="_blank">{{movieItem.title}}</a>
+                <div class="meta">
+                    <span>{{movieItem.sub_title}}</span>
+                </div>
+            </div>
+            <div class="extra content">
+                <a>豆瓣评分：{{movieItem.ratingValue}}</a>
+            </div>
+            <div class="extra content">
+                <a (click)="onPlayClick(i)">{{movieItem.summaryText | slice:0:30}}...</a>
+            </div>
+        </div>
+    </div>
+</div>
